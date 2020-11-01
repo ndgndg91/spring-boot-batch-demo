@@ -15,7 +15,7 @@ public class OrderGenerator {
     private final OrderRepository orderRepository;
     private final LineItemRepository lineItemRepository;
 
-    @Scheduled(fixedRate = 1000)
+//    @Scheduled(fixedRate = 1000)
     void create() {
         Order order = Order.builder()
                 .buyer(new Buyer("남동길", "ndgndg91@gmail.com", "010-7225-5198"))
