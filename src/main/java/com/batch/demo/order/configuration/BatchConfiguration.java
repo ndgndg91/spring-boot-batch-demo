@@ -38,7 +38,15 @@ public class BatchConfiguration {
     @Bean
     public Step testStep(){
         return this.stepBuilderFactory.get("testStep").tasklet((contribution, chunkContext) -> {
+            //    java -jar demo-0.0.1.jar "item=job-parameter-test" "run.date(date)=2020/11/01"
             log.info("tasklet execute!");
+            String item = chunkContext.getStepContext()
+                    .getJobParameters().getOrDefault("item", "").toString();
+            String runDate = chunkContext.getStepContext()
+                    .getJobParameters().getOrDefault("run.date", "").toString();
+
+            log.info("run date : {}, item parameter : {}", runDate, item);
+            // run date : Sun Nov 01 00:00:00 KST 2020, item parameter : job-parameter-test
             return RepeatStatus.FINISHED;
         }).build();
     }
